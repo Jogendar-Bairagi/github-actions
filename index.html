@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#f6f5f0">
+	<title>Northstar — Make room for your next idea</title>
+	<style>
+		:root {
+			color-scheme: light;
+			--ink: #17231e;
+			--muted: #66716a;
+			--paper: #f6f5f0;
+			--green: #c9f06b;
+			--line: rgba(23, 35, 30, .14);
+		}
+
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; }
+		body {
+			margin: 0;
+			background: var(--paper);
+			color: var(--ink);
+			font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+			-webkit-font-smoothing: antialiased;
+		}
+		a { color: inherit; text-decoration: none; }
+		.wrap { width: min(1160px, calc(100% - 48px)); margin: 0 auto; }
+
+		header {
+			height: 82px;
+			display: flex;
+			align-items: center;
+			border-bottom: 1px solid var(--line);
+		}
+		.nav { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+		.brand { display: inline-flex; gap: 10px; align-items: center; font-size: 19px; font-weight: 750; letter-spacing: -.7px; }
+		.brand-mark { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 9px; background: var(--ink); color: var(--green); font-size: 16px; }
+		.links { display: flex; gap: 34px; align-items: center; color: #536057; font-size: 14px; }
+		.links a:hover, .text-link:hover { color: #648d21; }
+		.button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border-radius: 999px; padding: 13px 20px; background: var(--ink); color: white; font-size: 14px; font-weight: 650; transition: transform .2s, background .2s; }
+		.button:hover { transform: translateY(-2px); background: #304238; }
+		.button .arrow { color: var(--green); font-size: 17px; }
+
+		.hero { display: grid; grid-template-columns: 1.05fr .95fr; gap: 70px; align-items: center; padding: 92px 0 100px; }
+		.eyebrow { display: inline-flex; align-items: center; gap: 9px; color: #526057; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
+		.eyebrow::before { content: ""; width: 22px; height: 2px; background: #8dbb38; }
+		h1 { max-width: 610px; margin: 22px 0 20px; font-size: clamp(52px, 6.4vw, 82px); line-height: .99; letter-spacing: -5.5px; font-weight: 650; }
+		h1 em { color: #799d36; font-style: normal; }
+		.intro { max-width: 480px; color: var(--muted); font-size: 17px; line-height: 1.75; }
+		.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; margin-top: 32px; }
+		.text-link { font-size: 14px; font-weight: 650; }
+		.text-link span { margin-left: 5px; }
+		.proof { display: flex; align-items: center; gap: 12px; margin-top: 48px; color: var(--muted); font-size: 12px; }
+		.avatars { display: flex; padding-left: 4px; }
+		.avatar { display: grid; place-items: center; width: 29px; height: 29px; margin-left: -4px; border: 2px solid var(--paper); border-radius: 50%; background: #e8ba91; color: #38281d; font-size: 9px; font-weight: 800; }
+		.avatar:nth-child(2) { background: #c7d6b3; }
+		.avatar:nth-child(3) { background: #d7b7c2; }
+		.avatar:nth-child(4) { background: #e9d17f; }
+		.stars { color: #7a9e31; letter-spacing: 1px; }
+
+		.visual { position: relative; min-height: 480px; display: grid; place-items: center; }
+		.orb { position: absolute; width: 390px; height: 390px; border-radius: 50%; background: #e4edcf; }
+		.card { position: relative; width: min(100%, 390px); padding: 25px; border: 1px solid rgba(255,255,255,.8); border-radius: 22px; background: rgba(255,255,255,.82); box-shadow: 0 28px 80px rgba(37, 50, 41, .12); transform: rotate(2deg); }
+		.card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+		.card-label { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #758078; }
+		.dots { display: flex; gap: 4px; }
+		.dots i { width: 5px; height: 5px; border-radius: 50%; background: #bdc5bd; }
+		.card h2 { margin: 0 0 8px; font-size: 25px; letter-spacing: -1px; }
+		.card-copy { margin: 0; color: var(--muted); font-size: 13px; }
+		.chart { height: 156px; display: flex; align-items: end; gap: 12px; margin: 26px 0 18px; padding: 0 5px; border-bottom: 1px solid var(--line); background: repeating-linear-gradient(to bottom, transparent 0, transparent 38px, rgba(23,35,30,.07) 39px, transparent 40px); }
+		.bar { flex: 1; border-radius: 7px 7px 0 0; background: #dce8c5; }
+		.bar:nth-child(1) { height: 35%; }.bar:nth-child(2) { height: 49%; }.bar:nth-child(3) { height: 42%; }.bar:nth-child(4) { height: 69%; }.bar:nth-child(5) { height: 61%; }.bar:nth-child(6) { height: 82%; }.bar:nth-child(7) { height: 100%; background: #a7d34f; }
+		.chart-labels { display: flex; justify-content: space-between; color: #919a93; font-size: 10px; }
+		.metric { position: absolute; right: -25px; bottom: 56px; padding: 16px 19px; border-radius: 15px; background: var(--ink); color: white; box-shadow: 0 12px 30px rgba(23,35,30,.2); transform: rotate(-4deg); }
+		.metric small { display: block; color: #c5d0c8; font-size: 10px; }
+		.metric strong { display: block; margin-top: 5px; font-size: 22px; letter-spacing: -.8px; }
+		.metric strong span { color: var(--green); font-size: 12px; }
+		.spark { position: absolute; top: 39px; right: 12px; color: #8fb53e; font-size: 34px; }
+
+		.trust { padding: 25px 0 31px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+		.trust p { margin: 0 0 21px; text-align: center; color: #818a83; font-size: 11px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; }
+		.logos { display: flex; align-items: center; justify-content: space-between; gap: 25px; color: #7a847d; font-size: 17px; font-weight: 750; letter-spacing: -.6px; }
+		.logos span:nth-child(2) { font-family: Georgia, serif; font-weight: 700; letter-spacing: -1px; }
+		.logos span:nth-child(3) { letter-spacing: 2px; font-size: 14px; }
+		.logos span:nth-child(4) { font-weight: 500; font-style: italic; }
+		.logos span:nth-child(5) { font-size: 15px; letter-spacing: 1px; }
+
+		.section { padding: 105px 0 115px; }
+		.section-heading { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 48px; }
+		.section-heading h2 { max-width: 570px; margin: 15px 0 0; font-size: clamp(34px, 4vw, 49px); line-height: 1.08; letter-spacing: -2.5px; }
+		.section-heading p { max-width: 340px; margin: 0 0 4px; color: var(--muted); font-size: 14px; line-height: 1.7; }
+		.features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+		.feature { min-height: 220px; padding: 25px; border: 1px solid var(--line); border-radius: 16px; background: rgba(255,255,255,.38); }
+		.feature-icon { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 13px; background: #e5edda; color: #668d2b; font-size: 19px; }
+		.feature h3 { margin: 28px 0 8px; font-size: 17px; letter-spacing: -.4px; }
+		.feature p { max-width: 290px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
+
+		.cta { display: flex; justify-content: space-between; align-items: center; gap: 30px; margin-bottom: 70px; padding: 42px 48px; border-radius: 20px; background: var(--ink); color: white; }
+		.cta h2 { margin: 0 0 8px; font-size: 29px; letter-spacing: -1px; }
+		.cta p { margin: 0; color: #c2cec5; font-size: 14px; }
+		.cta .button { flex-shrink: 0; background: var(--green); color: var(--ink); }
+		.cta .button .arrow { color: var(--ink); }
+		footer { display: flex; justify-content: space-between; gap: 20px; padding: 25px 0 35px; border-top: 1px solid var(--line); color: #7a847d; font-size: 12px; }
+		footer .brand { color: var(--ink); font-size: 15px; }
+		footer .brand-mark { width: 23px; height: 23px; border-radius: 7px; font-size: 13px; }
+
+		@media (max-width: 760px) {
+			.wrap { width: min(100% - 36px, 560px); }
+			header { height: 70px; }
+			.links { gap: 16px; }
+			.links a:not(.button) { display: none; }
+			.links .button { padding: 11px 15px; font-size: 12px; }
+			.hero { grid-template-columns: 1fr; gap: 25px; padding: 68px 0 70px; }
+			h1 { letter-spacing: -3.5px; }
+			.visual { min-height: 390px; }
+			.orb { width: 310px; height: 310px; }
+			.card { max-width: 350px; }
+			.metric { right: 0; bottom: 38px; }
+			.logos { justify-content: center; flex-wrap: wrap; gap: 20px 34px; }
+			.section { padding: 75px 0; }
+			.section-heading { display: block; margin-bottom: 30px; }
+			.section-heading p { margin-top: 18px; }
+			.features { grid-template-columns: 1fr; }
+			.feature { min-height: 190px; }
+			.cta { align-items: flex-start; flex-direction: column; padding: 30px 25px; }
+			footer { flex-wrap: wrap; }
+		}
+		@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
+	</style>
+</head>
+<body>
+	<header>
+		<nav class="nav wrap" aria-label="Main navigation">
+			<a class="brand" href="#home" aria-label="Northstar home"><span class="brand-mark">✳</span> northstar</a>
+			<div class="links">
+				<a href="#about">About</a>
+				<a href="#features">What we do</a>
+				<a class="button" href="#start">Let’s talk <span class="arrow">↗</span></a>
+			</div>
+		</nav>
+	</header>
+
+	<main>
+		<section class="hero wrap" id="home">
+			<div>
+				<span class="eyebrow">A clearer way forward</span>
+				<h1>Make room for your <em>next idea.</em></h1>
+				<p class="intro">Good work starts with a little perspective. We help ambitious teams find their focus, move with intention, and turn big plans into meaningful progress.</p>
+				<div class="hero-actions">
+					<a class="button" href="#start">Find your next step <span class="arrow">↗</span></a>
+					<a class="text-link" href="#features">Explore what we do <span>→</span></a>
+				</div>
+				<div class="proof">
+					<div class="avatars" aria-hidden="true"><span class="avatar">AL</span><span class="avatar">MK</span><span class="avatar">JS</span><span class="avatar">RT</span></div>
+					<div><span class="stars">★★★★★</span><br>Trusted by thoughtful teams</div>
+				</div>
+			</div>
+
+			<div class="visual" aria-label="Illustration of steady business growth">
+				<div class="orb"></div>
+				<span class="spark" aria-hidden="true">✳</span>
+				<div class="card">
+					<div class="card-top"><span class="card-label">Your momentum</span><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
+					<h2>Small steps. Big picture.</h2>
+					<p class="card-copy">Progress over the last 7 months</p>
+					<div class="chart" aria-hidden="true"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
+					<div class="chart-labels"><span>JAN</span><span>MAR</span><span>MAY</span><span>JUL</span></div>
+				</div>
+				<div class="metric"><small>Focused growth</small><strong>+28% <span>↗</span></strong></div>
+			</div>
+		</section>
+
+		<section class="trust" aria-label="Trusted by teams">
+			<div class="wrap">
+				<p>Good company for the journey</p>
+				<div class="logos"><span>◎ Orbit</span><span>Fieldnotes</span><span>COMMON&nbsp; GROUND</span><span>brightside</span><span>MONDAY STUDIO</span></div>
+			</div>
+		</section>
+
+		<section class="section wrap" id="features">
+			<div class="section-heading" id="about">
+				<div><span class="eyebrow">A little more clarity</span><h2>Build the kind of progress that lasts.</h2></div>
+				<p>Less noise, more of what matters. We bring the right people and ideas together to help you make confident moves.</p>
+			</div>
+			<div class="features">
+				<article class="feature"><span class="feature-icon" aria-hidden="true">⌁</span><h3>Find your focus</h3><p>Get clear on what matters now, so your energy goes where it can make a difference.</p></article>
+				<article class="feature"><span class="feature-icon" aria-hidden="true">◷</span><h3>Move with intention</h3><p>Turn good thinking into practical next steps your whole team can get behind.</p></article>
+				<article class="feature"><span class="feature-icon" aria-hidden="true">✳</span><h3>Make it meaningful</h3><p>Build momentum at a human pace and create work you’re proud to put into the world.</p></article>
+			</div>
+		</section>
+
+		<section class="cta wrap" id="start">
+			<div><h2>Your next chapter starts here.</h2><p>Bring us the big question. We’ll help you find a way forward.</p></div>
+			<a class="button" href="mailto:hello@northstar.example">Start a conversation <span class="arrow">↗</span></a>
+		</section>
+	</main>
+
+	<footer class="wrap">
+		<a class="brand" href="#home"><span class="brand-mark">✳</span> northstar</a>
+		<span>Thoughtful work. Better futures.</span>
+		<span>© 2025 Northstar Studio</span>
+	</footer>
+</body>
+</html>
