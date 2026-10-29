@@ -1,5 +1,9 @@
 name: validation workflow
-on: [push, workflow_dispatch]
+on: 
+  workflow-run: 
+    workflow: [second-workflow]
+    types:
+      - completed
 jobs:
   validate-file:
     runs-on: ubuntu-latest
