@@ -1,7 +1,7 @@
 name: validation workflow
 on: 
   workflow_run: 
-    workflow: Second Workflow
+    workflows: [Second Workflow]
     types:
       - completed
 jobs:
