@@ -1,6 +1,6 @@
 name: validation workflow
 on: 
-  workflow-run: 
+  workflow_run: 
     workflow: Second Workflow
     types:
       - completed
