@@ -20,7 +20,6 @@ jobs:
         run: test -f index.js
 
     validate-js-file:
-    if: ${{ github.event.workflow_run.conclusion == 'success'}}
     runs-on: ubuntu-latest
 
     steps:
