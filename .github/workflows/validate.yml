@@ -19,7 +19,7 @@ jobs:
       - name: validate js file
         run: test -f index.js
 
-    validate-js-file:
+  validate-js-file:
     runs-on: ubuntu-latest
 
     steps:
